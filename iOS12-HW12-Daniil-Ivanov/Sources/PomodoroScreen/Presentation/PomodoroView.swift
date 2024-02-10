@@ -8,53 +8,6 @@
 import UIKit
 import SnapKit
 
-// MARK: - Enums
-
-fileprivate enum Status {
-    case paused, started
-
-    var image: UIImage? {
-        let imageSystemName: String
-        switch self {
-        case .paused:
-            imageSystemName = "play"
-        case .started:
-            imageSystemName = "pause"
-        }
-        return UIImage(systemName: imageSystemName)
-    }
-
-    static var defaultImage: UIImage? {
-        return UIImage(systemName: "play")
-    }
-}
-
-fileprivate enum PomodoroPhase {
-    case work
-    case rest
-
-    var color: UIColor {
-        switch self {
-        case .work: StyleConstants.progressBarWorkStrokeColor
-        case .rest: StyleConstants.progressBarRestStrokeColor
-        }
-    }
-
-    var backgroundColor: UIColor {
-        switch self {
-        case .work: StyleConstants.progressBarWorkBackgroundStrokeColor
-        case .rest: StyleConstants.progressBarRestBackgroundStrokeColor
-        }
-    }
-
-    var initialTime: TimeInterval {
-        switch self {
-        case .work: Constants.workTime
-        case .rest: Constants.restTime
-        }
-    }
-}
-
 // MARK: - View
 
 final class PomodoroView: UIView {
@@ -301,13 +254,7 @@ final class PomodoroView: UIView {
 
 fileprivate enum StyleConstants {
     static let backgroundColor = UIColor.systemBackground
-
     static let progressBarFillColor = UIColor.clear
-    static let progressBarWorkBackgroundStrokeColor = UIColor(red: 250 / 255, green: 222 / 255, blue: 219 / 255, alpha: 1)
-    static let progressBarWorkStrokeColor = UIColor(red: 252 / 255, green: 140 / 255, blue: 128 / 255, alpha: 1)
-    static let progressBarRestBackgroundStrokeColor = UIColor(red: 176 / 255, green: 227 / 255, blue: 208 / 255, alpha: 1)
-    static let progressBarRestStrokeColor = UIColor(red: 97 / 255, green: 197 / 255, blue: 163 / 255, alpha: 1)
-
     static let timerLabelFont = UIFont.systemFont(ofSize: 60)
 }
 
@@ -328,10 +275,5 @@ fileprivate enum Constants {
     static let startPoint = -90.degreesToRadians
     static let endPoint = 270.degreesToRadians
 
-    // Время работы в секундах.
-    static let workTime = TimeInterval(5)
-
-    // Время отдыха в секундах.
-    static let restTime = TimeInterval(3)
     static let initialPhase = PomodoroPhase.work
 }

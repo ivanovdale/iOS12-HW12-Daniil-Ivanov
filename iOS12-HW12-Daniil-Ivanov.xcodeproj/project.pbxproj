@@ -16,6 +16,8 @@
 		0066623B2B616BF9006B3951 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0066623A2B616BF9006B3951 /* SnapKit */; };
 		0066623F2B617E9D006B3951 /* Int+DegreesToRadians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0066623E2B617E9D006B3951 /* Int+DegreesToRadians.swift */; };
 		006662412B629C4D006B3951 /* TimeInterval+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006662402B629C4D006B3951 /* TimeInterval+Time.swift */; };
+		007C07052B77A659000BF046 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C07042B77A659000BF046 /* Status.swift */; };
+		007C07072B77A671000BF046 /* PomodoroPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C07062B77A671000BF046 /* PomodoroPhase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		006662372B6164E6006B3951 /* PomodoroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroView.swift; sourceTree = "<group>"; };
 		0066623E2B617E9D006B3951 /* Int+DegreesToRadians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+DegreesToRadians.swift"; sourceTree = "<group>"; };
 		006662402B629C4D006B3951 /* TimeInterval+Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Time.swift"; sourceTree = "<group>"; };
+		007C07042B77A659000BF046 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		007C07062B77A671000BF046 /* PomodoroPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroPhase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 		006662342B6163C0006B3951 /* PomodoroScreen */ = {
 			isa = PBXGroup;
 			children = (
+				007C07032B77A64C000BF046 /* Model */,
 				006662362B6163DF006B3951 /* Controller */,
 				006662352B6163D5006B3951 /* Presentation */,
 			);
@@ -145,6 +150,15 @@
 				006662402B629C4D006B3951 /* TimeInterval+Time.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		007C07032B77A64C000BF046 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				007C07042B77A659000BF046 /* Status.swift */,
+				007C07062B77A671000BF046 /* PomodoroPhase.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,9 +239,11 @@
 			files = (
 				0066623F2B617E9D006B3951 /* Int+DegreesToRadians.swift in Sources */,
 				006662202B61630B006B3951 /* ViewController.swift in Sources */,
+				007C07052B77A659000BF046 /* Status.swift in Sources */,
 				0066621C2B61630B006B3951 /* AppDelegate.swift in Sources */,
 				0066621E2B61630B006B3951 /* SceneDelegate.swift in Sources */,
 				006662412B629C4D006B3951 /* TimeInterval+Time.swift in Sources */,
+				007C07072B77A671000BF046 /* PomodoroPhase.swift in Sources */,
 				006662382B6164E6006B3951 /* PomodoroView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
