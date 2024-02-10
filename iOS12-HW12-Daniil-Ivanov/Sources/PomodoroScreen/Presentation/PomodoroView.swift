@@ -8,38 +8,6 @@
 import UIKit
 import SnapKit
 
-// MARK: - Constants
-
-fileprivate enum StyleConstants {
-    static let backgroundColor = UIColor.white
-    static let progressBarFillColor = UIColor.clear
-    static let progressBarWorkBackgroundStrokeColor = UIColor(red: 250 / 255, green: 222 / 255, blue: 219 / 255, alpha: 1)
-    static let progressBarWorkStrokeColor = UIColor(red: 252 / 255, green: 140 / 255, blue: 128 / 255, alpha: 1)
-    static let progressBarRestBackgroundStrokeColor = UIColor(red: 176 / 255, green: 227 / 255, blue: 208 / 255, alpha: 1)
-    static let progressBarRestStrokeColor = UIColor(red: 97 / 255, green: 197 / 255, blue: 163 / 255, alpha: 1)
-    static let timerLabelFont = UIFont.systemFont(ofSize: 60)
-}
-
-fileprivate enum LayoutConstants {
-    static let progressBarLineWidth = 5.0
-    static let timerLabelOffset = 0.2
-    static let startStopButtonOffset = 0.55
-    static let startStopButtonImageSize = CGSize(width: 40, height: 40)
-    static func getProgressBarRadius(bounds: CGRect) -> Double {
-        return bounds.width / 2 * 0.75
-    }
-}
-
-fileprivate enum Constants {
-    static let startPoint = -90.degreesToRadians
-    static let endPoint = 270.degreesToRadians
-    // Время работы в секундах.
-    static let workTime = TimeInterval(5)
-    // Время отдыха в секундах.
-    static let restTime = TimeInterval(3)
-    static let initialPhase = PomodoroPhase.work
-}
-
 // MARK: - Enums
 
 fileprivate enum Status {
@@ -315,4 +283,36 @@ final class PomodoroView: UIView {
         let timeSincePause = progressBarShapeLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         progressBarShapeLayer.beginTime = timeSincePause
     }
+}
+
+// MARK: - Constants
+
+fileprivate enum StyleConstants {
+    static let backgroundColor = UIColor.white
+    static let progressBarFillColor = UIColor.clear
+    static let progressBarWorkBackgroundStrokeColor = UIColor(red: 250 / 255, green: 222 / 255, blue: 219 / 255, alpha: 1)
+    static let progressBarWorkStrokeColor = UIColor(red: 252 / 255, green: 140 / 255, blue: 128 / 255, alpha: 1)
+    static let progressBarRestBackgroundStrokeColor = UIColor(red: 176 / 255, green: 227 / 255, blue: 208 / 255, alpha: 1)
+    static let progressBarRestStrokeColor = UIColor(red: 97 / 255, green: 197 / 255, blue: 163 / 255, alpha: 1)
+    static let timerLabelFont = UIFont.systemFont(ofSize: 60)
+}
+
+fileprivate enum LayoutConstants {
+    static let progressBarLineWidth = 5.0
+    static let timerLabelOffset = 0.2
+    static let startStopButtonOffset = 0.55
+    static let startStopButtonImageSize = CGSize(width: 40, height: 40)
+    static func getProgressBarRadius(bounds: CGRect) -> Double {
+        return bounds.width / 2 * 0.75
+    }
+}
+
+fileprivate enum Constants {
+    static let startPoint = -90.degreesToRadians
+    static let endPoint = 270.degreesToRadians
+    // Время работы в секундах.
+    static let workTime = TimeInterval(5)
+    // Время отдыха в секундах.
+    static let restTime = TimeInterval(3)
+    static let initialPhase = PomodoroPhase.work
 }
