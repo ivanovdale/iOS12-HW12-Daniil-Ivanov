@@ -9,11 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    // MARK: - Lifecycle
+
+    override func loadView() {
+        view = PomodoroView()
     }
 
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
