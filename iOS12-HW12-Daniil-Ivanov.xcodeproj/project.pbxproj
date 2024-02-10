@@ -110,7 +110,6 @@
 			children = (
 				006662362B6163DF006B3951 /* Controller */,
 				006662352B6163D5006B3951 /* Presentation */,
-				0066621F2B61630B006B3951 /* ViewController.swift */,
 			);
 			path = PomodoroScreen;
 			sourceTree = "<group>";
@@ -126,6 +125,7 @@
 		006662362B6163DF006B3951 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0066621F2B61630B006B3951 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
