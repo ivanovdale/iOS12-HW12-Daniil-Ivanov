@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         currentStatus = currentStatus == .started ? .paused : .started
     }
 
-    // MARK: - Update data
+    // MARK: - Update view
 
     private func updateCurrentTimeDependantViews() {
         pomodoroView?.updateTimerLabel(currentTime: currentTime, currentPhase: currentPhase)
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         pomodoroView?.updateStartStopButton(currentPhase: currentPhase, currentStatus: currentStatus)
     }
 
-    // MARK: - Helper methods
+    // MARK: - Update data
 
     private func startTimer() {
         timer = Timer.scheduledTimer(
