@@ -11,31 +11,7 @@ import SnapKit
 // MARK: - View
 
 final class PomodoroView: UIView {
-    private var timer: Timer? = nil
-
-    private var currentPhase = Constants.initialPhase {
-        didSet {
-            updateCurrentPhaseDependantViews()
-        }
-    }
-
-    private var currentTime = Constants.initialPhase.initialTime {
-        didSet {
-            if currentTime <= 0 {
-                toggleCurrentPhase()
-                currentTime = currentPhase.initialTime
-                restartTimer()
-                progressAnimation(duration: currentTime)
-            }
-            updateCurrentTimeDependantViews()
-        }
-    }
-
-    private var currentStatus: Status? {
-        didSet {
-            updateCurrentStatusDependantViews()
-        }
-    }
+    private let startStopButtonHandler: () -> Void
 
     // MARK: - Outlets
 
@@ -73,13 +49,11 @@ final class PomodoroView: UIView {
 
     // MARK: - Init
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(startStopButtonHandler: @escaping () -> Void) {
+        self.startStopButtonHandler = startStopButtonHandler
+        super.init(frame: .zero)
         setupView()
         setupHierarchy()
-        updateCurrentTimeDependantViews()
-        updateCurrentPhaseDependantViews()
-        updateCurrentStatusDependantViews()
     }
 
     required init?(coder: NSCoder) {
@@ -89,7 +63,6 @@ final class PomodoroView: UIView {
     // MARK: - Setup
 
     private func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = StyleConstants.backgroundColor
     }
 
@@ -146,52 +119,25 @@ final class PomodoroView: UIView {
     // MARK: - Actions
 
     @objc func startStopButtonTapped(sender: UIButton) {
-        if currentStatus == nil {
-            startTimer()
-            progressAnimation(duration: currentTime)
-        } else if currentStatus == .paused {
-            startTimer()
-            resumeAnimation()
-        } else if currentStatus == .started {
-            stopTimer()
-            pauseAnimation()
-        }
-
-        currentStatus = currentStatus == .started ? .paused : .started
+        startStopButtonHandler()
     }
 
     // MARK: - UI update
 
-    private func updateCurrentTimeDependantViews() {
-        updateTimerLabel()
-        updateProgressBar()
-    }
-
-    private func updateCurrentPhaseDependantViews() {
-        updateTimerLabel()
-        updateProgressBarBackground()
-        updateProgressBar()
-        updateStartStopButton()
-    }
-
-    private func updateCurrentStatusDependantViews() {
-        updateStartStopButton()
-    }
-
-    private func updateTimerLabel() {
+    func updateTimerLabel(currentTime: TimeInterval, currentPhase: PomodoroPhase) {
         timerLabel.text = currentTime.time
         timerLabel.textColor = currentPhase.color
     }
 
-    private func updateProgressBarBackground() {
+    func updateProgressBarBackground(currentPhase: PomodoroPhase) {
         progressBarBackgroundShapeLayer.strokeColor = currentPhase.backgroundColor.cgColor
     }
 
-    private func updateProgressBar() {
+    func updateProgressBar(currentPhase: PomodoroPhase) {
         progressBarShapeLayer.strokeColor = currentPhase.color.cgColor
     }
 
-    private func updateStartStopButton() {
+    func updateStartStopButton(currentPhase: PomodoroPhase, currentStatus: Status?) {
         startStopButton.tintColor = currentPhase.color
 
         guard let image = currentStatus?.image ?? Status.defaultImage else { return }
@@ -201,27 +147,7 @@ final class PomodoroView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    // MARK: - Helper methods
-
-    private func startTimer() {
-        timer = Timer.scheduledTimer(
-            withTimeInterval: 0.0001,
-            repeats: true
-        ) { _ in self.currentTime -= 0.0001 }
-    }
-
-    private func stopTimer() {
-        timer?.invalidate()
-    }
-
-    private func restartTimer() {
-        stopTimer()
-        startTimer()
-    }
-
-    private func toggleCurrentPhase() {
-        currentPhase = currentPhase == .work ? .rest : .work
-    }
+    // MARK: - Animation
 
     func progressAnimation(duration: TimeInterval) {
         let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
@@ -274,6 +200,4 @@ fileprivate enum LayoutConstants {
 fileprivate enum Constants {
     static let startPoint = -90.degreesToRadians
     static let endPoint = 270.degreesToRadians
-
-    static let initialPhase = PomodoroPhase.work
 }
